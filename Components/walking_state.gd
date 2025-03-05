@@ -34,13 +34,13 @@ func _physics_process(delta: float) -> void:
 	var direction:Vector3 = (%CamPivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed = SPEED
 	
-	#Running or Walking
 	if current_state == States.Running:
 		current_speed = SPEED * 2
 	else:
 		current_speed = SPEED
 	
 	if direction:
+		#TODO: 增加一些平滑度， 比如使用move_toward，使用双倍的current_speed作为加速参数
 		player.velocity.x = direction.x * current_speed
 		player.velocity.z = direction.z * current_speed
 	else:
