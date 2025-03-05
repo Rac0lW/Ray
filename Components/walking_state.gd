@@ -2,6 +2,7 @@ extends State
 
 @onready var player: CharacterBody3D = %Player
 
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 9
 
@@ -19,10 +20,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_state = States.Walking
 	
 func _physics_process(delta: float) -> void:
+	
+	if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
+		switch_state.emit(%WallRunningState)
+		player.velocity = Vector3(player.velocity.x, 0, 0)
+	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta * 2
 
-	if Input.is_action_just_pressed("ui_accept") and player.is_on_floor():
+	if Input.is_action_just_pressed("ui_accept"):
 		player.velocity.y = JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")

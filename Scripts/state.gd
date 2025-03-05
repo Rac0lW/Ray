@@ -5,7 +5,8 @@ signal switch_state
 
 func _ready() -> void:
 	exit()
-	
+func _init() -> void:
+	pass
 func enter():
 	set_process(true)
 	set_physics_process(true)

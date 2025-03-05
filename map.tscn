@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cskx4t1ln11wj"]
+[gd_scene load_steps=14 format=3 uid="uid://cskx4t1ln11wj"]
 
 [ext_resource type="Texture2D" uid="uid://dq25thxr2g7iv" path="res://Assets/Textures/kenney_prototype-textures/PNG/Dark/texture_01.png" id="1_lvlsg"]
 [ext_resource type="Texture2D" uid="uid://biwbdw7nstpeo" path="res://Assets/Textures/kenney_prototype-textures/PNG/Orange/texture_01.png" id="2_mvtdd"]
 [ext_resource type="Texture2D" uid="uid://cp2i3ri1x3lsq" path="res://Assets/Textures/kenney_prototype-textures/PNG/Red/texture_01.png" id="3_pixh5"]
+[ext_resource type="Texture2D" uid="uid://btuae1xvbkor6" path="res://Assets/Textures/kenney_prototype-textures/PNG/Dark/texture_08.png" id="4_p5pve"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1uih"]
 albedo_texture = ExtResource("1_lvlsg")
@@ -15,6 +16,30 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvi4j"]
 albedo_texture = ExtResource("3_pixh5")
 uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0an3"]
+albedo_texture = ExtResource("1_lvlsg")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_e0an3"]
+size = Vector3(20, 10, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p5pve"]
+data = PackedVector3Array(-10, 5, 0.5, 10, 5, 0.5, -10, -5, 0.5, 10, 5, 0.5, 10, -5, 0.5, -10, -5, 0.5, 10, 5, -0.5, -10, 5, -0.5, 10, -5, -0.5, -10, 5, -0.5, -10, -5, -0.5, 10, -5, -0.5, 10, 5, 0.5, 10, 5, -0.5, 10, -5, 0.5, 10, 5, -0.5, 10, -5, -0.5, 10, -5, 0.5, -10, 5, -0.5, -10, 5, 0.5, -10, -5, -0.5, -10, 5, 0.5, -10, -5, 0.5, -10, -5, -0.5, 10, 5, 0.5, -10, 5, 0.5, 10, 5, -0.5, -10, 5, 0.5, -10, 5, -0.5, 10, 5, -0.5, -10, -5, 0.5, 10, -5, 0.5, -10, -5, -0.5, 10, -5, 0.5, 10, -5, -0.5, -10, -5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urblq"]
+albedo_texture = ExtResource("4_p5pve")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e0an3"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_p5pve"]
+height = 10.0
+radius = 5.0
 
 [node name="Map" type="Node3D"]
 
@@ -37,7 +62,7 @@ use_collision = true
 size = Vector3(16, 6, 1)
 
 [node name="Wall2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25.8996, 5.50082, 1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25.8996, 7.47851, 1)
 material_override = SubResource("StandardMaterial3D_rtv8b")
 use_collision = true
 size = Vector3(16, 6, 1)
@@ -113,3 +138,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35855, 1, 2)
 material_override = SubResource("StandardMaterial3D_fvi4j")
 use_collision = true
 size = Vector3(2, 1, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5.5, 0)
+material_override = SubResource("StandardMaterial3D_e0an3")
+mesh = SubResource("BoxMesh_e0an3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_p5pve")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 5.57275, 11.9158)
+material_override = SubResource("StandardMaterial3D_urblq")
+mesh = SubResource("CylinderMesh_e0an3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("CylinderShape3D_p5pve")

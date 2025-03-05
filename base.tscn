@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=10 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://be3nkfh7dviju" path="res://Scripts/state_manager.gd" id="4_ohhpf"]
 [ext_resource type="Script" uid="uid://d4c5c57mhf8nk" path="res://Components/cam_component.gd" id="5_4vn6n"]
+[ext_resource type="Script" uid="uid://bi6y4hqsshbve" path="res://wall_running_state.gd" id="5_21bcp"]
 [ext_resource type="Script" uid="uid://dsexlo2ux3ga" path="res://Components/walking_state.gd" id="6_tpea4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
@@ -34,6 +35,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Player" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.834007, 0)
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_ohf1p")
@@ -48,9 +52,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.751019, 0)
 [node name="CamComponent" type="Node" parent="Player/CamPivot"]
 script = ExtResource("5_4vn6n")
 
+[node name="RayCast2Right" type="RayCast3D" parent="Player/CamPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.256426, 0)
+target_position = Vector3(0, -1.25, 0)
+
+[node name="RayCast2Left" type="RayCast3D" parent="Player/CamPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.256426, 0)
+target_position = Vector3(0, -1.25, 0)
+
 [node name="StateManager" type="Node" parent="Player" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_ohhpf")
 current_state = NodePath("BaseMoveState")
 
 [node name="BaseMoveState" type="Node" parent="Player/StateManager"]
+unique_name_in_owner = true
 script = ExtResource("6_tpea4")
+
+[node name="WallRunningState" type="Node" parent="Player/StateManager"]
+unique_name_in_owner = true
+script = ExtResource("5_21bcp")
