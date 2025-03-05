@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 	
 	if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
 		switch_state.emit(%WallRunningState)
-		player.velocity = Vector3(player.velocity.x, 0, 0)
 	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta * 2

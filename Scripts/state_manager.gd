@@ -18,6 +18,6 @@ func switch_state(to: State):
 		current_state.exit()
 		current_state = to
 		current_state.enter()
-		print("State Changed to ", current_state.name)
+		#print("State Changed to ", current_state.name)
 
 	
