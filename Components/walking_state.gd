@@ -1,6 +1,7 @@
 extends State
 
 @onready var player: CharacterBody3D = %Player
+@onready var ray_cast_2_ground: RayCast3D = %RayCast2Ground
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 9
@@ -28,8 +29,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func _physics_process(delta: float) -> void:
 	
-	if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
-		switch_state.emit(%WallRunningState)
+	
+	if not ray_cast_2_ground.is_colliding():
+		if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
+			switch_state.emit(%WallRunningState)
 	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta * 2
