@@ -168,7 +168,11 @@ layout_mode = 0
 offset_right = 182.0
 offset_bottom = 211.0
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="StateLabel" type="Label" parent="Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "State:"
+
+[node name="UniLabel" type="Label" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

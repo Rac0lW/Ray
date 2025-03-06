@@ -3,10 +3,6 @@ class_name State
 
 signal switch_state
 
-#将Ready中得分exit实现到init中
-func _init() -> void:
-	pass
-
 func enter():
 	active()
 	

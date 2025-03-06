@@ -16,21 +16,20 @@ func _physics_process(_delta: float) -> void:
 	if player.is_on_floor():
 		switch_state.emit(%BaseMoveState)
 		
-	if not %RayCast2Right.is_colliding() and not %RayCast2Left.is_colliding() and not player.is_on_wall():
+	if not %RayCast2Right.is_colliding() and not %RayCast2Left.is_colliding():
 		#TODO：需要RayCast在更加合理的长度
 		switch_state.emit(%BaseMoveState)
 	
 	
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	#TODO: 在转向其他方向时后依然能全速运行
-	var direction:Vector3 = (%CamPivot.transform.basis * Vector3(0, 0, input_dir.y)).normalized()
+	var direction:Vector3 = (%CamPivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	var current_speed = Settings.WALL_RUNNING_SPEED
 	if direction:
-		player.velocity.z = direction.z * current_speed
+		player.velocity.z = direction.z * Settings.WALL_RUNNING_SPEED
 		player.velocity.y = 0
 	else:
-		player.velocity.z = move_toward(player.velocity.z, 0, current_speed)
+		player.velocity.z = move_toward(player.velocity.z, 0, Settings.WALL_RUNNING_SPEED)
 		player.velocity.y = 0
 
 	player.move_and_slide()
