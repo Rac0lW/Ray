@@ -2,7 +2,6 @@ extends State
 
 @onready var player: CharacterBody3D = %Player
 
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 9
 
@@ -11,6 +10,11 @@ enum States{
 	Running
 }
 var current_state := States.Walking
+
+func enter():
+	active()
+	#解决WallRunning状态所中断的跑走切换状态
+	current_state = States.Walking
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Run"):

@@ -5,6 +5,10 @@ class_name StateManager
 @export var current_state:State
 
 func _ready() -> void:
+	#直接全部静默， 之后手动打开
+	for c:State in get_children():
+		c.exit()
+	
 	current_state.enter()
 	
 	for c:State in get_children():
