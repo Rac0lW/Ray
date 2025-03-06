@@ -3,13 +3,11 @@ extends State
 @onready var player: CharacterBody3D = %Player
 @onready var ray_cast_2_ground: RayCast3D = %RayCast2Ground
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 9
-
 enum States{
 	Walking,
 	Running
 }
+
 var current_state := States.Walking
 
 func enter():
@@ -38,16 +36,16 @@ func _physics_process(delta: float) -> void:
 		player.velocity += player.get_gravity() * delta * 2
 
 	if Input.is_action_just_pressed("ui_accept"):
-		player.velocity.y = JUMP_VELOCITY
+		player.velocity.y = Settings.JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = (%CamPivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var current_speed = SPEED
+	var current_speed = Settings.SPEED
 	
 	if current_state == States.Running:
-		current_speed = SPEED * 2
+		current_speed = Settings.SPEED * 2
 	else:
-		current_speed = SPEED
+		current_speed = Settings.SPEED
 	
 	if direction:
 		#TODO: 增加一些平滑度， 比如使用move_toward，使用双倍的current_speed作为加速参数
