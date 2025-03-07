@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=16 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://player.gd" id="2_56f15"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bi6y4hqsshbve" path="res://wall_running_state.gd" id="5_21bcp"]
 [ext_resource type="Script" uid="uid://dvm7csgo0xs6" path="res://crouching_state.gd" id="6_42dj3"]
 [ext_resource type="Script" uid="uid://dsexlo2ux3ga" path="res://Components/walking_state.gd" id="6_tpea4"]
-[ext_resource type="Script" uid="uid://se1juxs5mgx4" path="res://wall_jumping_state.gd" id="7_42dj3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -149,10 +148,6 @@ script = ExtResource("6_tpea4")
 [node name="WallRunningState" type="Node" parent="Player/StateManager"]
 unique_name_in_owner = true
 script = ExtResource("5_21bcp")
-
-[node name="WallJumpingState" type="Node" parent="Player/StateManager"]
-unique_name_in_owner = true
-script = ExtResource("7_42dj3")
 
 [node name="CrouchingState" type="Node" parent="Player/StateManager"]
 unique_name_in_owner = true
