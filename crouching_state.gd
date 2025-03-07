@@ -1,7 +1,7 @@
 extends State
 
 
-@onready var player: CharacterBody3D = %Player
+@onready var player: Player = %Player
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 const SPEED = 3.0
 
@@ -27,15 +27,14 @@ func _physics_process(delta: float) -> void:
 		player.velocity += player.get_gravity() * delta * 2
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
-	var direction:Vector3 = (%Player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var current_speed = SPEED
+	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
 	
 	if direction:
 		#TODO: 增加一些平滑度， 比如使用move_toward，使用双倍的current_speed作为加速参数
-		player.velocity.x = direction.x * current_speed
-		player.velocity.z = direction.z * current_speed
+		player.velocity.x = direction.x * Settings.CROUCHING_SPEED
+		player.velocity.z = direction.z * Settings.CROUCHING_SPEED
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, current_speed)
-		player.velocity.z = move_toward(player.velocity.z, 0, current_speed)
+		player.velocity.x = move_toward(player.velocity.x, 0, Settings.LOSING_SPEED)
+		player.velocity.z = move_toward(player.velocity.z, 0, Settings.LOSING_SPEED)
 
 	player.move_and_slide()

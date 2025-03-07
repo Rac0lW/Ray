@@ -1,6 +1,6 @@
 extends State
 
-@onready var player: CharacterBody3D = %Player
+@onready var player: Player = %Player
 @onready var ray_cast_2_ground: RayCast3D = %RayCast2Ground
 
 enum States{
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		player.velocity.y = Settings.JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
-	var direction:Vector3 = (%Player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
 	var current_speed = Settings.SPEED
 	
 	if current_state == States.Running:
