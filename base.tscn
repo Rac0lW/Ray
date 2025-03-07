@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=15 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://be3nkfh7dviju" path="res://Scripts/state_manager.gd" id="4_ohhpf"]
@@ -81,6 +81,13 @@ _data = {
 &"Crouch": SubResource("Animation_tpea4"),
 &"RESET": SubResource("Animation_42dj3")
 }
+
+[sub_resource type="GDScript" id="GDScript_tpea4"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = str(%Player.velocity)
+"
 
 [node name="Base" type="Node3D"]
 
@@ -176,3 +183,4 @@ text = "State:"
 [node name="UniLabel" type="Label" parent="Control/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = SubResource("GDScript_tpea4")

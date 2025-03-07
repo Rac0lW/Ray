@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		player.velocity += player.get_gravity() * delta * 2
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
-	var direction:Vector3 = (%CamPivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction:Vector3 = (%Player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed = SPEED
 	
 	if direction:
