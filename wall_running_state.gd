@@ -24,11 +24,5 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	#TODO: 在转向其他方向时后依然能全速运行
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
-	if direction:
-		player.velocity.z = direction.z * Settings.WALL_RUNNING_SPEED
-		player.velocity.x = direction.x * Settings.WALL_RUNNING_SPEED
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, Settings.LOSING_SPEED)
-		player.velocity.z = move_toward(player.velocity.z, 0, Settings.LOSING_SPEED)
-
+	player.move(direction, Settings.WALL_RUNNING_SPEED)
 	player.move_and_slide()

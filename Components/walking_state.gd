@@ -47,12 +47,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		current_speed = Settings.SPEED
 	
-	if direction:
-		#TODO: 增加一些平滑度， 比如使用move_toward，使用双倍的current_speed作为加速参数
-		player.velocity.x = direction.x * current_speed
-		player.velocity.z = direction.z * current_speed
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, Settings.LOSING_SPEED)
-		player.velocity.z = move_toward(player.velocity.z, 0, Settings.LOSING_SPEED)
+	player.move(direction, current_speed)
 
 	player.move_and_slide()
