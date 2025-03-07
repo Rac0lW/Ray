@@ -25,13 +25,13 @@ func _physics_process(_delta: float) -> void:
 	#TODO: 在转向其他方向时后依然能全速运行
 	var direction:Vector3 = (%Player.transform.basis * Vector3(0, 0, input_dir.y)).normalized()
 	if direction:
-		#TODO: 增加一些平滑度， 比如使用move_toward，使用双倍的current_speed作为加速参数
-		player.velocity.x = direction.x * Settings.WALL_RUNNING_SPEED
 		player.velocity.z = direction.z * Settings.WALL_RUNNING_SPEED
+		#我就不知到为什么没了这两个整个WallRunning就完全不能动了
+		player.velocity.x = direction.x * Settings.WALL_RUNNING_SPEED
 		player.velocity.y = 0
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, Settings.WALL_RUNNING_SPEED)
-		player.velocity.z = move_toward(player.velocity.z, 0, Settings.WALL_RUNNING_SPEED)
+		player.velocity.x = move_toward(player.velocity.x, 0, Settings.LOSING_SPEED)
+		player.velocity.z = move_toward(player.velocity.z, 0, Settings.LOSING_SPEED)
 		player.velocity.y = 0
 
 

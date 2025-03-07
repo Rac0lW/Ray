@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		player.velocity.x = direction.x * current_speed
 		player.velocity.z = direction.z * current_speed
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, current_speed)
-		player.velocity.z = move_toward(player.velocity.z, 0, current_speed)
+		player.velocity.x = move_toward(player.velocity.x, 0, Settings.LOSING_SPEED)
+		player.velocity.z = move_toward(player.velocity.z, 0, Settings.LOSING_SPEED)
 
 	player.move_and_slide()
