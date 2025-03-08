@@ -6,22 +6,24 @@ extends State
 
 var direction:Vector3
 var isHovering:bool = false
-@export var POWER_SCALE:float = 1.0
+@export var POWER_SCALE_Z:float = 1.2
+@export var POWER_SCALE_Y:float = 0.8
+
 
 func enter():
 	active()
 	#进来的时候给一个向上的力
-	player.velocity.y = Settings.JUMP_VELOCITY
+	player.velocity.y = Settings.JUMP_VELOCITY * POWER_SCALE_Y
 	
 	isHovering = true
 	
 	if ray_cast_2_left.is_colliding():
 		direction = player.fixed_dir(Vector3(1, 0, -1))
-		player.move(direction, Settings.JUMP_VELOCITY * POWER_SCALE)
+		player.move(direction, Settings.JUMP_VELOCITY * POWER_SCALE_Z)
 		
 	if ray_cast_2_right.is_colliding():
 		direction = player.fixed_dir(Vector3(-1, 0, -1))
-		player.move(direction, Settings.JUMP_VELOCITY * POWER_SCALE)
+		player.move(direction, Settings.JUMP_VELOCITY * POWER_SCALE_Z)
 		
 	await get_tree().create_timer(0.3).timeout
 	isHovering = false
@@ -38,6 +40,7 @@ func _physics_process(delta: float) -> void:
 	if player.velocity.y < 0 and abs(player.velocity.x) <= 0.001:
 		switch_state.emit(%BaseMoveState)
 	
+	#加个Hovering防止重复贴墙
 	if not ray_cast_2_ground.is_colliding() and not isHovering:
 		if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
 			switch_state.emit(%WallRunningState)

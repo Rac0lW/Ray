@@ -158,7 +158,6 @@ script = ExtResource("6_42dj3")
 [node name="HoveringState" type="Node" parent="Player/StateManager"]
 unique_name_in_owner = true
 script = ExtResource("8_56f15")
-POWER_SCALE = 1.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 unique_name_in_owner = true
