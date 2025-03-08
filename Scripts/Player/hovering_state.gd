@@ -9,6 +9,7 @@ var direction:Vector3
 
 func enter():
 	active()
+	#进来的时候给一个向上的力
 	player.velocity.y = Settings.JUMP_VELOCITY
 	
 	if ray_cast_2_left.is_colliding():

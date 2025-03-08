@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
-[ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://player.gd" id="2_56f15"]
-[ext_resource type="Script" uid="uid://be3nkfh7dviju" path="res://Scripts/state_manager.gd" id="4_ohhpf"]
+[ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://Scripts/Player/player.gd" id="2_56f15"]
+[ext_resource type="Script" uid="uid://be3nkfh7dviju" path="res://Scripts/Player/state_manager.gd" id="4_ohhpf"]
 [ext_resource type="Script" uid="uid://d4c5c57mhf8nk" path="res://Components/cam_component.gd" id="5_4vn6n"]
-[ext_resource type="Script" uid="uid://bi6y4hqsshbve" path="res://wall_running_state.gd" id="5_21bcp"]
-[ext_resource type="Script" uid="uid://dvm7csgo0xs6" path="res://crouching_state.gd" id="6_42dj3"]
+[ext_resource type="Script" uid="uid://bi6y4hqsshbve" path="res://Scripts/Player/wall_running_state.gd" id="5_21bcp"]
+[ext_resource type="Script" uid="uid://dvm7csgo0xs6" path="res://Scripts/Player/crouching_state.gd" id="6_42dj3"]
 [ext_resource type="Script" uid="uid://dsexlo2ux3ga" path="res://Components/walking_state.gd" id="6_tpea4"]
-[ext_resource type="Script" uid="uid://cc6ryxf4gqd5o" path="res://hovering_state.gd" id="8_56f15"]
+[ext_resource type="Script" uid="uid://cc6ryxf4gqd5o" path="res://Scripts/Player/hovering_state.gd" id="8_56f15"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
