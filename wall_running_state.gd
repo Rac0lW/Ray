@@ -3,15 +3,10 @@ extends State
 @onready var ray_cast_2_left: RayCast3D = %RayCast2Left
 @onready var ray_cast_2_right: RayCast3D = %RayCast2Right
 
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("ui_accept"):
-		#if ray_cast_2_left.is_colliding():
-			#player.velocity.x = player.fixed_dir(Vector3(1, 0, 0)).x * Settings.JUMP_VELOCITY
-			#player.velocity.z = player.fixed_dir(Vector3(1, 0, 0)).z * Settings.JUMP_VELOCITY
-		#
-		#if ray_cast_2_right.is_colliding():
-			#player.velocity.x = player.fixed_dir(Vector3(-1, 0, 0)).x * Settings.JUMP_VELOCITY
-			#player.velocity.z = player.fixed_dir(Vector3(-1, 0, 0)).z * Settings.JUMP_VELOCITY
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		switch_state.emit(%HoveringState)
+		
 
 func _physics_process(delta: float) -> void:
 	if player.is_on_floor():

@@ -9,7 +9,7 @@ enum States{
 }
 
 var current_state := States.Walking
-
+var current_speed:float = 5.0
 func enter():
 	active()
 	#解决WallRunning状态所中断的跑走切换状态
@@ -26,8 +26,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		switch_state.emit(%CrouchingState)
 	
 func _physics_process(delta: float) -> void:
-	
-	
 	if not ray_cast_2_ground.is_colliding():
 		if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
 			switch_state.emit(%WallRunningState)
@@ -40,7 +38,6 @@ func _physics_process(delta: float) -> void:
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
-	var current_speed = Settings.SPEED
 	
 	if current_state == States.Running:
 		current_speed = Settings.SPEED * 2

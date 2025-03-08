@@ -18,7 +18,7 @@ func _ready() -> void:
 		c.switch_state.connect(switch_state)
 		
 
-func switch_state(to: State):
+func switch_state(to: State): 
 	if not state_change_allowed:
 		return
 	
