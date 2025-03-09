@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=19 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://Scripts/Player/player.gd" id="2_56f15"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dvm7csgo0xs6" path="res://Scripts/Player/crouching_state.gd" id="6_42dj3"]
 [ext_resource type="Script" uid="uid://dsexlo2ux3ga" path="res://Components/walking_state.gd" id="6_tpea4"]
 [ext_resource type="Script" uid="uid://cc6ryxf4gqd5o" path="res://Scripts/Player/hovering_state.gd" id="8_56f15"]
+[ext_resource type="Script" uid="uid://b7od3wc1g4tpi" path="res://sliding_state.gd" id="9_cho24"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -79,18 +80,49 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_cho24"]
+resource_name = "Slide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.0525561),
+"update": 0,
+"values": [2.0, 1.675]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.101532),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.4, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56f15"]
 _data = {
 &"Crouch": SubResource("Animation_tpea4"),
-&"RESET": SubResource("Animation_42dj3")
+&"RESET": SubResource("Animation_42dj3"),
+&"Slide": SubResource("Animation_cho24")
 }
 
 [sub_resource type="GDScript" id="GDScript_tpea4"]
 script/source = "extends Label
 @onready var ray_cast_2_right: RayCast3D = %RayCast2Right
+@onready var player: Player = %Player
 
 func _process(delta: float) -> void:
-	text = str(ray_cast_2_right.target_position)
+	#text = \"Speed: \" + str(player.velocity.length())
+	text = str(player.get_floor_normal())
 "
 
 [node name="Base" type="Node3D"]
@@ -158,6 +190,10 @@ script = ExtResource("6_42dj3")
 [node name="HoveringState" type="Node" parent="Player/StateManager"]
 unique_name_in_owner = true
 script = ExtResource("8_56f15")
+
+[node name="SlidingState" type="Node" parent="Player/StateManager"]
+unique_name_in_owner = true
+script = ExtResource("9_cho24")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 unique_name_in_owner = true

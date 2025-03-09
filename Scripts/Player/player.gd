@@ -12,3 +12,9 @@ func move(dir: Vector3, speed: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, Settings.LOSING_SPEED)
 		velocity.z = move_toward(velocity.z, 0, Settings.LOSING_SPEED)
+
+#TODO: Add the slide state(slope and ground)
+
+#TODO: Cancel the Walk
+
+#TODO: Make a Gun

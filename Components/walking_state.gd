@@ -23,7 +23,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_state = States.Walking
 		
 	if event.is_action_pressed("Crouch"):
-		switch_state.emit(%CrouchingState)
+		
+		match current_state:
+			States.Walking:
+				switch_state.emit(%CrouchingState)
+			States.Running:
+				switch_state.emit(%SlidingState)
+				
+	if event.is_action_pressed("F"):
+		switch_state.emit(%SlidingState)
+		
 	
 func _physics_process(delta: float) -> void:
 	if not ray_cast_2_ground.is_colliding():
