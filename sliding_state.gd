@@ -1,10 +1,20 @@
 extends State
 @onready var player: Player = %Player
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var state_manager: StateManager = $".."
 
 func enter():
 	active()
 	animation_player.play("Slide")
+	
+	#进入滑行加速
+	player.velocity *= 1.3
+	
+	#自动停止
+	await get_tree().create_timer(1.0).timeout
+	
+	if state_manager.current_state == self:
+		switch_state.emit(%BaseMoveState)
 	
 func exit():
 	inactive()
@@ -15,8 +25,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		switch_state.emit(%BaseMoveState)
 	
 	if event.is_action_pressed("ui_accept"):
+		player.velocity.y = Settings.JUMP_VELOCITY
+		
+		player.velocity *= 1.3
+		
+		await get_tree().create_timer(0.5).timeout
+		
 		switch_state.emit(%BaseMoveState)
-		player.velocity.y = Settings.JUMP_VELOCITY * 2
 
 func _physics_process(delta: float) -> void:
 	
@@ -25,6 +40,7 @@ func _physics_process(delta: float) -> void:
 		
 	var normal = Vector3.ZERO
 	
+	#下面的函数只会在斜坡触发
 	if player.is_on_floor():
 		normal = player.get_floor_normal()
 		

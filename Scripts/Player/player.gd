@@ -10,8 +10,9 @@ func move(dir: Vector3, speed: float) -> void:
 		velocity.x = dir.x * speed
 		velocity.z = dir.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, Settings.LOSING_SPEED)
-		velocity.z = move_toward(velocity.z, 0, Settings.LOSING_SPEED)
+		#if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, Settings.LOSING_SPEED)
+			velocity.z = move_toward(velocity.z, 0, Settings.LOSING_SPEED)
 
 #TODO: Add the slide state(slope and ground)
 

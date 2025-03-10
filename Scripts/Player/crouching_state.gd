@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		switch_state.emit(%WallRunningState)
 	
 	if not player.is_on_floor():
-		player.velocity += player.get_gravity() * delta * 2
+		player.velocity += player.get_gravity() * delta * 3
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))

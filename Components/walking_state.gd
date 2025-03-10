@@ -10,6 +10,7 @@ enum States{
 
 var current_state := States.Walking
 var current_speed:float = 5.0
+
 func enter():
 	active()
 	#解决WallRunning状态所中断的跑走切换状态
@@ -23,15 +24,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_state = States.Walking
 		
 	if event.is_action_pressed("Crouch"):
-		
 		match current_state:
 			States.Walking:
 				switch_state.emit(%CrouchingState)
 			States.Running:
 				switch_state.emit(%SlidingState)
 				
-	if event.is_action_pressed("F"):
-		switch_state.emit(%SlidingState)
+	#if event.is_action_pressed("F"):
+		#switch_state.emit(%SlidingState)
 		
 	
 func _physics_process(delta: float) -> void:
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
 	
 	if current_state == States.Running:
-		current_speed = Settings.SPEED * 2
+		current_speed = Settings.RUNNING_SPEED
 	else:
 		current_speed = Settings.SPEED
 	
