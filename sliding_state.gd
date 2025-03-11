@@ -14,7 +14,7 @@ func enter():
 	await get_tree().create_timer(1.0).timeout
 	
 	if state_manager.current_state == self:
-		switch_state.emit(%BaseMoveState)
+		switch_state.emit(%CrouchingState)
 	
 func exit():
 	inactive()

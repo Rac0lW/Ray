@@ -25,6 +25,7 @@ func switch_state(to: State):
 	if to == current_state:
 		return
 	else:
+		Settings.LAST_STATE = current_state
 		current_state.exit()
 		current_state = to
 		current_state.enter()

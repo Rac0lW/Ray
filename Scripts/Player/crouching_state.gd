@@ -7,7 +7,10 @@ const SPEED = 3.0
 
 func enter():
 	active()
-	animation_player.play("Crouch")
+	if Settings.LAST_STATE == %BaseMoveState:
+		animation_player.play("Crouch")
+	else:
+		animation_player.play("SlideToCrouch")
 	
 func exit():
 	inactive()

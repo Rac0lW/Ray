@@ -16,6 +16,9 @@ func enter():
 	active()
 	#解决WallRunning状态所中断的跑走切换状态
 	current_state = last_walk_or_run_state
+	
+	if Settings.LAST_STATE == %CrouchingState:
+		current_speed = States.Walking
 
 func exit():
 	inactive()
@@ -31,12 +34,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Crouch"):
 		match current_state:
 			States.Walking:
-				switch_state.emit(%CrouchingState)
+				if player.is_on_floor():
+					switch_state.emit(%CrouchingState)
 			States.Running:
 				switch_state.emit(%SlidingState)
-				
-	#if event.is_action_pressed("F"):
-		#switch_state.emit(%SlidingState)
+	
+	if event.is_action_pressed("ui_accept"):
+		player.velocity.y += Settings.JUMP_VELOCITY
 		
 	
 func _physics_process(delta: float) -> void:
@@ -47,9 +51,6 @@ func _physics_process(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta * 2
-
-	if Input.is_action_just_pressed("ui_accept"):
-		player.velocity.y = Settings.JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))

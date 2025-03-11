@@ -10,7 +10,7 @@ const SLIDING_SPEED = 15.0
 const LOSING_SPEED = 20.0
 const RUNNING_SPEED = 10.0
 
-
+var LAST_STATE: State
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ESC"):
