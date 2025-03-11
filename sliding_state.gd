@@ -8,8 +8,8 @@ func enter():
 	animation_player.play("Slide")
 	
 	#进入滑行加速
-	player.velocity *= 1.3
-	
+	player.velocity.x *= 1.2
+	player.velocity.z *= 1.2
 	#自动停止
 	await get_tree().create_timer(1.0).timeout
 	
@@ -21,17 +21,18 @@ func exit():
 	animation_player.play_backwards("Slide")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_released("Crouch") or event.is_action_released("Run"):
-		switch_state.emit(%BaseMoveState)
 	
 	if event.is_action_pressed("ui_accept"):
 		player.velocity.y = Settings.JUMP_VELOCITY
 		
-		player.velocity *= 1.3
+		player.velocity.x *= 1.2
+		player.velocity.z *= 1.2
+		
 		
 		await get_tree().create_timer(0.5).timeout
 		
-		switch_state.emit(%BaseMoveState)
+		if state_manager.current_state == self:
+			switch_state.emit(%BaseMoveState)
 
 func _physics_process(delta: float) -> void:
 	

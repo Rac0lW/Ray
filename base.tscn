@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=20 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://Scripts/Player/player.gd" id="2_56f15"]
@@ -24,6 +24,8 @@ tonemap_mode = 4
 glow_enabled = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ohf1p"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_cho24"]
 
 [sub_resource type="Animation" id="Animation_tpea4"]
 resource_name = "Crouch"
@@ -153,6 +155,11 @@ unique_name_in_owner = true
 [node name="Camera3D" type="Camera3D" parent="Player/CamPivot"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.751019, 0)
+fov = 105.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/CamPivot/Camera3D"]
+transform = Transform3D(0.725374, 0, 0.688355, 0, 1, 0, -0.688355, 0, 0.725374, -3.445, -0.931, -3.866)
+texture = SubResource("CameraTexture_cho24")
 
 [node name="CamComponent" type="Node" parent="Player/CamPivot"]
 script = ExtResource("5_4vn6n")
@@ -172,6 +179,7 @@ unique_name_in_owner = true
 target_position = Vector3(0, -1.71, 0)
 
 [node name="StateManager" type="Node" parent="Player" node_paths=PackedStringArray("current_state")]
+unique_name_in_owner = true
 script = ExtResource("4_ohhpf")
 current_state = NodePath("BaseMoveState")
 

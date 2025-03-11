@@ -10,11 +10,16 @@ enum States{
 
 var current_state := States.Walking
 var current_speed:float = 5.0
+var last_walk_or_run_state:States = States.Walking
 
 func enter():
 	active()
 	#解决WallRunning状态所中断的跑走切换状态
-	current_state = States.Walking
+	current_state = last_walk_or_run_state
+
+func exit():
+	inactive()
+	last_walk_or_run_state = current_state
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Run"):
@@ -35,6 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	
 func _physics_process(delta: float) -> void:
+	
 	if not ray_cast_2_ground.is_colliding():
 		if player.is_on_wall_only() and (%RayCast2Right.is_colliding() or %RayCast2Left.is_colliding()):
 			switch_state.emit(%WallRunningState)
