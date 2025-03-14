@@ -1,9 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://cskx4t1ln11wj"]
+[gd_scene load_steps=20 format=3 uid="uid://cskx4t1ln11wj"]
 
 [ext_resource type="Texture2D" uid="uid://dq25thxr2g7iv" path="res://Assets/Textures/kenney_prototype-textures/PNG/Dark/texture_01.png" id="1_lvlsg"]
 [ext_resource type="Texture2D" uid="uid://biwbdw7nstpeo" path="res://Assets/Textures/kenney_prototype-textures/PNG/Orange/texture_01.png" id="2_mvtdd"]
 [ext_resource type="Texture2D" uid="uid://cp2i3ri1x3lsq" path="res://Assets/Textures/kenney_prototype-textures/PNG/Red/texture_01.png" id="3_pixh5"]
 [ext_resource type="Texture2D" uid="uid://btuae1xvbkor6" path="res://Assets/Textures/kenney_prototype-textures/PNG/Dark/texture_08.png" id="4_p5pve"]
+[ext_resource type="PackedScene" uid="uid://jsma5dijaiag" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Canopy.prefab.scn" id="5_oysan"]
+[ext_resource type="PackedScene" uid="uid://dsjtxsqwfkybf" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Checkpoint.prefab.scn" id="6_sb2pt"]
+[ext_resource type="PackedScene" uid="uid://ub57413xe1te" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Generator 1.prefab.scn" id="7_0t07s"]
+[ext_resource type="PackedScene" uid="uid://dmt6j3os50sd2" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Observation_Tower.prefab.scn" id="8_6qsgm"]
+[ext_resource type="PackedScene" uid="uid://4c02wrwoqwht" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Tent_Large.prefab.scn" id="9_ooc2g"]
+[ext_resource type="PackedScene" uid="uid://cg48gliup66at" path="res://Assets/Models/POLY - Military Shooting Range/Prefabs/Buildings/SM_Awning.prefab.scn" id="10_2wwcf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1uih"]
 albedo_texture = ExtResource("1_lvlsg")
@@ -227,3 +233,21 @@ mesh = SubResource("CylinderMesh_e0an3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("CylinderShape3D_p5pve")
+
+[node name="SM_Canopy" parent="." instance=ExtResource("5_oysan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.885, 0.500002, -22.6165)
+
+[node name="SM_Checkpoint" parent="." instance=ExtResource("6_sb2pt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0866, 0.5, -30.2332)
+
+[node name="SM_Generator 1" parent="." instance=ExtResource("7_0t07s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1011, 0.499999, -43.0899)
+
+[node name="SM_Observation_Tower" parent="." instance=ExtResource("8_6qsgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5706, 0.5, -44.9443)
+
+[node name="SM_Tent_Large" parent="." instance=ExtResource("9_ooc2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.7742, 0.511396, -40.1145)
+
+[node name="SM_Awning" parent="." instance=ExtResource("10_2wwcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.601, 0.500002, -32.125)
