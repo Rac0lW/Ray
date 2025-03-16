@@ -9,7 +9,7 @@ const CROUCHING_SPEED = 3.0
 const SLIDING_SPEED = 15.0
 const LOSING_SPEED = 20.0
 const RUNNING_SPEED = 10.0
-
+const MAX_JUMP_COUNT:int = 2
 var LAST_STATE: State
 
 func _unhandled_input(event: InputEvent) -> void:

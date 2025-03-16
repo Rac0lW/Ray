@@ -56,6 +56,38 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0.75, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_im64q"]
+resource_name = "OnLeftWallRunning"
+length = 0.2455
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.15708)]
+}
+
+[sub_resource type="Animation" id="Animation_ytyno"]
+resource_name = "OnRightWallRunning"
+length = 0.229
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0959931)]
+}
+
 [sub_resource type="Animation" id="Animation_42dj3"]
 length = 0.001
 tracks/0/type = "value"
@@ -137,38 +169,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.675, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_im64q"]
-resource_name = "OnLeftWallRunning"
-length = 0.2455
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%Camera3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.233333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.15708)]
-}
-
-[sub_resource type="Animation" id="Animation_ytyno"]
-resource_name = "OnRightWallRunning"
-length = 0.229
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%Camera3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0959931)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56f15"]

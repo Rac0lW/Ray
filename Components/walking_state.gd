@@ -11,9 +11,14 @@ enum States{
 var current_state := States.Walking
 var current_speed:float = 5.0
 var last_walk_or_run_state:States = States.Walking
+var current_jump_count:int
+
+func _ready() -> void:
+	current_jump_count = Settings.MAX_JUMP_COUNT
 
 func enter():
 	active()
+	current_jump_count = Settings.MAX_JUMP_COUNT
 	#解决WallRunning状态所中断的跑走切换状态
 	current_state = last_walk_or_run_state
 	
@@ -40,7 +45,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				switch_state.emit(%SlidingState)
 	
 	if event.is_action_pressed("ui_accept"):
-		player.velocity.y += Settings.JUMP_VELOCITY
+		if current_jump_count > 1:
+			player.velocity.y += Settings.JUMP_VELOCITY
+			current_jump_count -= 1
 		
 	
 func _physics_process(delta: float) -> void:
@@ -51,6 +58,9 @@ func _physics_process(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta * 2
+		
+	if player.is_on_floor():
+		current_jump_count = Settings.MAX_JUMP_COUNT
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
