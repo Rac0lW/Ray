@@ -34,6 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		player.velocity.y = Settings.JUMP_VELOCITY
 		switch_state.emit(%BaseMoveState)
+	
+	if event.is_action_pressed("ShortDash"):
+		switch_state.emit(%ShortDashState)
 
 func _physics_process(delta: float) -> void:
 	#降落的时候进入基本状态, 这个方法巧妙地解决了流畅性的问题

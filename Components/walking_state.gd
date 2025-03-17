@@ -48,6 +48,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_jump_count > 1:
 			player.velocity.y += Settings.JUMP_VELOCITY
 			current_jump_count -= 1
+			
+	if event.is_action_pressed("ShortDash"):
+		switch_state.emit(%ShortDashState)
 		
 	
 func _physics_process(delta: float) -> void:

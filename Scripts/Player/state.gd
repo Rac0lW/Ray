@@ -1,6 +1,7 @@
 extends Node
 class_name State
 
+
 signal switch_state
 
 func enter():
@@ -18,3 +19,4 @@ func active():
 	set_process(true)
 	set_physics_process(true)
 	set_process_unhandled_input(true)
+	

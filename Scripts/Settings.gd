@@ -11,7 +11,7 @@ const LOSING_SPEED = 20.0
 const RUNNING_SPEED = 10.0
 const MAX_JUMP_COUNT:int = 2
 var LAST_STATE: State
-
+const MAX_DASH_COUNT:int = 2
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ESC"):
 		get_tree().quit()

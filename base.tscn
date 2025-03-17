@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=24 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://Scripts/Player/player.gd" id="2_56f15"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dsexlo2ux3ga" path="res://Components/walking_state.gd" id="6_tpea4"]
 [ext_resource type="Script" uid="uid://cc6ryxf4gqd5o" path="res://Scripts/Player/hovering_state.gd" id="8_56f15"]
 [ext_resource type="Script" uid="uid://b7od3wc1g4tpi" path="res://sliding_state.gd" id="9_cho24"]
+[ext_resource type="Script" uid="uid://c2objkdbsmsxj" path="res://short_dash_state.gd" id="10_dlkme"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -266,6 +267,10 @@ script = ExtResource("8_56f15")
 [node name="SlidingState" type="Node" parent="Player/StateManager"]
 unique_name_in_owner = true
 script = ExtResource("9_cho24")
+
+[node name="ShortDashState" type="Node" parent="Player/StateManager"]
+unique_name_in_owner = true
+script = ExtResource("10_dlkme")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 unique_name_in_owner = true
