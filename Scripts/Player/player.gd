@@ -1,9 +1,13 @@
 extends CharacterBody3D
 class_name Player
 
+var current_dash_count:int
+
+func _ready() -> void:
+	current_dash_count = Settings.MAX_DASH_COUNT
+
 func fixed_dir(on: Vector3) -> Vector3:
 	return (transform.basis * on).normalized()
-
 
 func move(dir: Vector3, speed: float) -> void:
 	if dir:

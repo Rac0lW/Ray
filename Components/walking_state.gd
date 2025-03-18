@@ -64,6 +64,7 @@ func _physics_process(delta: float) -> void:
 		
 	if player.is_on_floor():
 		current_jump_count = Settings.MAX_JUMP_COUNT
+		player.current_dash_count = 2
 
 	var input_dir := Input.get_vector("A", "D", "W", "S")
 	var direction:Vector3 = player.fixed_dir(Vector3(input_dir.x, 0, input_dir.y))
