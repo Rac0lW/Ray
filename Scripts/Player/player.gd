@@ -17,6 +17,13 @@ func move(dir: Vector3, speed: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, Settings.LOSING_SPEED)
 		velocity.z = move_toward(velocity.z, 0, Settings.LOSING_SPEED)
 
-#TODO: Add the slide state(slope and ground)
 
-#TODO: Make a Gun
+func move_delta(dir: Vector3, speed: float, delta) -> void:
+	if dir:
+		velocity.x += dir.x * speed * delta
+		velocity.z += dir.z * speed * delta
+	else:
+		if velocity.x > 0:
+			velocity.x -= Settings.LOSING_SPEED * delta
+		if velocity.y > 0:
+			velocity.z -= Settings.LOSING_SPEED * delta

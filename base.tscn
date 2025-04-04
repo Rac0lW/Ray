@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c1oco7oshmgls"]
+[gd_scene load_steps=26 format=3 uid="uid://c1oco7oshmgls"]
 
 [ext_resource type="PackedScene" uid="uid://cskx4t1ln11wj" path="res://map.tscn" id="1_04jrf"]
 [ext_resource type="Script" uid="uid://b2v03i4scrro5" path="res://Scripts/Player/player.gd" id="2_56f15"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cc6ryxf4gqd5o" path="res://Scripts/Player/hovering_state.gd" id="8_56f15"]
 [ext_resource type="Script" uid="uid://b7od3wc1g4tpi" path="res://sliding_state.gd" id="9_cho24"]
 [ext_resource type="Script" uid="uid://c2objkdbsmsxj" path="res://short_dash_state.gd" id="10_dlkme"]
+[ext_resource type="Script" uid="uid://c0l4ldnb70mvw" path="res://swing_state.gd" id="11_im64q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8rhti"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -192,6 +193,8 @@ func _process(delta: float) -> void:
 	text = \"Speed: %.2f\" % player.velocity.length()
 "
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_im64q"]
+
 [node name="Base" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -224,7 +227,12 @@ fov = 105.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Player/CamPivot/Camera3D"]
 transform = Transform3D(0.725374, 0, 0.688355, 0, 1, 0, -0.688355, 0, 0.725374, -3.445, -0.931, -3.866)
+visible = false
 texture = SubResource("CameraTexture_cho24")
+
+[node name="GrabIndicator" type="RayCast3D" parent="Player/CamPivot/Camera3D"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -16)
 
 [node name="CamComponent" type="Node" parent="Player/CamPivot"]
 script = ExtResource("5_4vn6n")
@@ -272,6 +280,12 @@ script = ExtResource("9_cho24")
 unique_name_in_owner = true
 script = ExtResource("10_dlkme")
 
+[node name="SwingState" type="Node" parent="Player/StateManager" node_paths=PackedStringArray("player", "indicator")]
+unique_name_in_owner = true
+script = ExtResource("11_im64q")
+player = NodePath("../..")
+indicator = NodePath("../../CamPivot/Camera3D/GrabIndicator")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 unique_name_in_owner = true
 libraries = {
@@ -307,3 +321,28 @@ text = "State:"
 unique_name_in_owner = true
 layout_mode = 2
 script = SubResource("GDScript_tpea4")
+
+[node name="Aim" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Aim"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_im64q")
+
+[node name="Label" type="Label" parent="Aim/PanelContainer"]
+layout_mode = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1

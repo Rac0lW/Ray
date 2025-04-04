@@ -51,7 +51,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	if event.is_action_pressed("ShortDash"):
 		switch_state.emit(%ShortDashState)
-		
+	
+	if event.is_action_pressed("Grab") and %GrabIndicator.is_colliding():
+		switch_state.emit(%SwingState)
 	
 func _physics_process(delta: float) -> void:
 	
