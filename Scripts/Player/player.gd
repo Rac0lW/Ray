@@ -20,10 +20,12 @@ func move(dir: Vector3, speed: float) -> void:
 
 func move_delta(dir: Vector3, speed: float, delta) -> void:
 	if dir:
-		velocity.x += dir.x * speed * delta
-		velocity.z += dir.z * speed * delta
+		if velocity.x < 20.0:
+			velocity.x += dir.x * speed * delta
+		if velocity.z < 20.0:
+			velocity.z += dir.z * speed * delta
 	else:
 		if velocity.x > 0:
 			velocity.x -= Settings.LOSING_SPEED * delta
-		if velocity.y > 0:
+		if velocity.z > 0:
 			velocity.z -= Settings.LOSING_SPEED * delta

@@ -7,6 +7,7 @@ extends State
 @export var player:Player
 @export var indicator:RayCast3D
 @export var onGrabingSpeed:float = 5.0
+
 var force:Vector3 = Vector3.ZERO
 var target:Vector3 = Vector3.ZERO
 
@@ -17,15 +18,11 @@ func enter():
 
 func exit():
 	inactive()
-	force = Vector3.ZERO
-	target = Vector3.ZERO
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("Grab"):
 		switch_state.emit(%BaseMoveState)
 
-
-		
 func _process(delta: float) -> void:
 	var target_dir = player.global_position.direction_to(target)
 	var target_distance = player.global_position.distance_to(target)
